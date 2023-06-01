@@ -1,4 +1,4 @@
-# credits
+# inventory
 
 ## Project setup
 ```
