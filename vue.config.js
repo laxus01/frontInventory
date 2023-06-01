@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   devServer: {
-    disableHostCheck: true
+    public: 'subdomain.domain.ext:port'
   },
   transpileDependencies: [
     'vuetify'
