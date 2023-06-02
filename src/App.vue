@@ -25,6 +25,7 @@ export default {
 
 <style module>
 .container {
+  height: 650px;
   margin-top: 80px;
 }
 </style>

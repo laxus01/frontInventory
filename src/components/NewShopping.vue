@@ -12,7 +12,8 @@
                 <v-text-field label="Detalle*" v-model="newProduct.detail" required></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field label="Valor Venta*" v-model="newProduct.saleValue" required></v-text-field>
+                <vuetify-money v-model="newProduct.saleValue" label="Valor Venta*" v-bind:clearable="clearable"
+                      v-bind:options="options" />
               </v-col>
               <v-col cols="12">
                 <v-text-field label="Codigo Barra*" v-model="newProduct.barcode" required></v-text-field>

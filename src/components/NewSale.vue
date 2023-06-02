@@ -39,6 +39,9 @@
     </v-dialog>
     <div class="sale">
       <div class="sale__left">
+        <v-col cols="12">
+          <v-text-field label="Codigo de barra*" @change="getProductsByBarcode()" v-model="saleItem.barcode" required></v-text-field>
+        </v-col>
         <v-row>
           <v-col cols="12">
             <v-autocomplete @change="getStatusProduct()" :items="items" return-object label="Producto*" item-value="value"
@@ -222,6 +225,7 @@ export default {
     getStatusProduct() {
       this.saleItem.unit_value = this.saleItem.product_id.saleValue;
       this.saleItem.existence = this.saleItem.product_id.existence;
+      this.saleItem.barcode = this.saleItem.product_id.barcode;
     },
 
     async getClients() {
@@ -248,6 +252,15 @@ export default {
           id: products.id,
         });
       });
+    },
+
+    async getProductsByBarcode() {
+      let data = await axios.get(`api/products/getProductsByBarcode/${this.saleItem.barcode}`);
+      let products = await data.data.products;
+      console.log(products[0]);
+      this.saleItem.product_id = products[0];
+      this.saleItem.existence = products[0].existence;
+      this.saleItem.unit_value = products[0].sale_value;
     },
 
     saveSaleProduct() {
