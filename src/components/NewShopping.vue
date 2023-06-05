@@ -183,6 +183,7 @@ export default {
     dialogDelete: false,
     menu: false,
     totalSale: 0,
+    totalSale2: 0,
     dialog: false,
     stateAlert: false,
     newProduct: {},
@@ -336,6 +337,7 @@ export default {
         value = parseFloat(item.total);
         cont = cont + value;
       });
+      this.totalSale2 = cont;
       this.totalSale = this.convert(cont);
     },
 
@@ -345,6 +347,7 @@ export default {
         id: id,
         supplier_id: this.shoppingItem.supplier.id,
         date: this.listProducs[0].date,
+        total: totalSale2,
       }
       this.listProducs.forEach((item) => {
         this.myArray.push(new Array(item.id, item.invoice_number, item.product_id, item.supplier_id, item.unit, item.quantity, item.total, id, item.date));
