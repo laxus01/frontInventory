@@ -120,10 +120,10 @@
           this.desserts.push({
             supplier: item.supplier,
             date: item.date,
-            total_shopping: this.convert(item.total_shopping),
+            total_shopping: this.convert(item.total),
             total_payments: this.convert(item.total_payments),
-            balance: this.convert(item.total_shopping - item.total_payments),
-            balance2: item.total_shopping - item.total_payments,
+            balance: this.convert(item.total - item.total_payments),
+            balance2: item.total - item.total_payments,
             payable_id: item.id,
           });
         });
