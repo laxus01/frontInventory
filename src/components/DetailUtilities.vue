@@ -103,6 +103,8 @@ export default {
   data: () => ({
     desserts: [],
     state: false,
+    date1: "",
+    date2: "",
   }),
   methods: {
 
@@ -121,7 +123,7 @@ export default {
     calculateSales() {
       let cont = 0
       this.desserts.forEach(item => {
-        cont = cont + item.total_sale;
+        cont = cont + parseFloat(item.total_sale);
       });
       return this.convert(cont)
     },
@@ -129,7 +131,7 @@ export default {
     calculateShopping() {
       let cont = 0
       this.desserts.forEach(item => {
-        cont = cont + item.total_shopping;
+        cont = cont + parseFloat(item.total_shopping);
       });
       return this.convert(cont)
     },
@@ -137,7 +139,7 @@ export default {
     calculateTotal() {
       let cont = 0
       this.desserts.forEach(item => {
-        cont = cont + (item.total_sale - item.total_shopping);
+        cont = cont + parseFloat(item.total_sale - item.total_shopping);
       });
       return this.convert(cont)
     }

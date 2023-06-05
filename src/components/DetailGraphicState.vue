@@ -37,11 +37,11 @@
           </v-date-picker>
         </v-menu>
       </v-col>
-          <v-col cols="2">
-            <v-btn @click="getGraphicState()" class="mx-2" fab dark small color="primary">
-              <v-icon dark> search </v-icon>
-            </v-btn>
-          </v-col>
+      <v-col cols="2">
+        <v-btn @click="getGraphicState()" class="mx-2" fab dark small color="primary">
+          <v-icon dark> search </v-icon>
+        </v-btn>
+      </v-col>
     </v-row>
     <div class="content">
       <Doughnut :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId" :dataset-id-key="datasetIdKey"
@@ -122,7 +122,7 @@ export default {
     }
   },
   methods: {
-    
+
     async getGraphicState() {
       let data = await axios.get(
         `api/transactions/getIncomeExpenses/${this.date1}/date2/${this.date2}`

@@ -191,10 +191,6 @@ export default {
       this.close();
     },
 
-    handleClick(value) {
-      this.$router.push(`create-credit/${value.id}`);
-    },
-
     async deleteProduct(editedItem) {
       axios
         .put(`api/products/inactivate/${editedItem.id}`)
