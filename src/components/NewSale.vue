@@ -320,7 +320,7 @@ export default {
         id: id,
         client_id: this.clients.id,
         date: this.listProducs[0].date,
-        total: totalSale2,
+        total: this.totalSale2,
       }
       this.listProducs.forEach((item) => {
         this.myArray.push(new Array(item.id, item.product_id, item.quantity, item.unit, item.date, id));
