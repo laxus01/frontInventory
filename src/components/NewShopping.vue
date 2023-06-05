@@ -253,11 +253,11 @@ export default {
       },
       {
         text: "Valor Unitario",
-        value: "unit",
+        value: "unit2",
       },
       {
         text: "Valor Total",
-        value: "total",
+        value: "total2",
       },
       { text: "Acción", value: "actions", sortable: false },
     ],
@@ -299,8 +299,10 @@ export default {
         product_id: this.shoppingItem.product_id.id,
         detail: this.shoppingItem.product_id.detail,
         quantity: this.shoppingItem.quantity,
-        unit: this.convert(this.shoppingItem.total_value / this.shoppingItem.quantity),
-        total: this.convert(this.shoppingItem.total_value),
+        unit: this.shoppingItem.total_value / this.shoppingItem.quantity,
+        unit2: this.convert(this.shoppingItem.total_value / this.shoppingItem.quantity),
+        total: this.shoppingItem.total_value,
+        total2: this.convert(this.shoppingItem.total_value),
         date: this.shoppingItem.date,
         invoice_number: this.shoppingItem.invoice_number,
         supplier_id: this.shoppingItem.supplier.id,
@@ -331,7 +333,7 @@ export default {
       let cont = 0;
       let value = 0;
       this.listProducs.forEach((item) => {
-        value = parseFloat(this.replaceData(item.total));
+        value = parseFloat(item.total);
         cont = cont + value;
       });
       this.totalSale = this.convert(cont);
@@ -345,7 +347,7 @@ export default {
         date: this.listProducs[0].date,
       }
       this.listProducs.forEach((item) => {
-        this.myArray.push(new Array(item.id, item.invoice_number, item.product_id, item.supplier_id, this.replaceData(item.unit), item.quantity, this.replaceData(item.total), id, item.date));
+        this.myArray.push(new Array(item.id, item.invoice_number, item.product_id, item.supplier_id, item.unit, item.quantity, item.total, id, item.date));
       })
       this.setShopping(this.myArray, data3);
     },

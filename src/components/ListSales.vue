@@ -230,17 +230,8 @@
           });
       },
   
-      convert(num) {
-        if (!isNaN(num)) {
-          num = num
-            .toString()
-            .split("")
-            .reverse()
-            .join("")
-            .replace(/(?=\d*\.?)(\d{3})/g, "$1.");
-          num = num.split("").reverse().join("").replace(/^[\.]/, "");
-          return num;
-        }
+      convert(number) {
+        return new Intl.NumberFormat().format(number);
       },
   
     },

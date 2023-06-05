@@ -202,11 +202,11 @@ export default {
       },
       {
         text: "Valor Unitario",
-        value: "unit",
+        value: "unit2",
       },
       {
         text: "Valor Total",
-        value: "total",
+        value: "total2",
       },
       { text: "Acción", value: "actions", sortable: false },
     ],
@@ -269,8 +269,10 @@ export default {
         detail: this.saleItem.product_id.detail,
         existence: this.saleItem.product_id.existence,
         quantity: this.saleItem.quantity,
-        unit: this.convert(this.saleItem.unit_value),
-        total: this.convert(this.saleItem.total_value),
+        unit: this.saleItem.unit_value,
+        unit2: this.convert(this.saleItem.unit_value),
+        total: this.saleItem.total_value,
+        total2: this.convert(this.saleItem.total_value),
         date: this.saleItem.date,
         id: shortid.generate(),
       });
@@ -304,7 +306,7 @@ export default {
       let cont = 0;
       let value = 0;
       this.listProducs.forEach((item) => {
-        value = parseInt(item.total.replace(/\./g, ''))
+        value = parseFloat(item.total);
         cont = cont + value;
       });
       this.totalSale = this.convert(cont);
@@ -318,7 +320,7 @@ export default {
         date: this.listProducs[0].date,
       }
       this.listProducs.forEach((item) => {
-        this.myArray.push(new Array(item.id, item.product_id, item.quantity, item.unit.replace(/\./g, ''), item.date, id));
+        this.myArray.push(new Array(item.id, item.product_id, item.quantity, item.unit, item.date, id));
       })
       this.setSale(this.myArray, data3);
     },
@@ -408,17 +410,8 @@ export default {
       receivable = !receivable;
     },
 
-    convert(num) {
-      if (!isNaN(num)) {
-        num = num
-          .toString()
-          .split("")
-          .reverse()
-          .join("")
-          .replace(/(?=\d*\.?)(\d{3})/g, "$1.");
-        num = num.split("").reverse().join("").replace(/^[\.]/, "");
-        return num;
-      }
+    convert(number) {
+      return new Intl.NumberFormat().format(number);
     },
   },
 
