@@ -58,11 +58,11 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12">
+          <v-col cols="6">
             <vuetify-money v-model="saleItem.unit_value" label="Valor Unitario" v-bind:clearable="clearable"
               v-bind:options="options" />
           </v-col>
-          <v-col cols="12">
+          <v-col cols="6">
             <vuetify-money v-model="saleItem.total_value" label="Valor Total" readonly="readonly"
               v-bind:options="options" />
           </v-col>
