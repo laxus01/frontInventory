@@ -25,7 +25,7 @@
                     <vuetify-money v-model="editedItem.saleValue" label="Valor Venta*" v-bind:clearable="clearable"
                       v-bind:options="options" />
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" v-if="editedIndex === -1">
                     <v-text-field label="Codigo Barra*" v-model="editedItem.barcode" required></v-text-field>
                   </v-col>
                   <v-col cols="12">
