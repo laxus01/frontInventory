@@ -55,11 +55,39 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogBarcode" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Registrar Codigo</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field label="Detalle*" v-model="barcodeItem.detail" required></v-text-field>
+                  </v-col>
+                  <v-col cols="12" v-if="editedIndex === -1">
+                    <v-text-field label="Codigo Barra*" v-model="barcodeItem.barcode" required></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="closeBarcode">
+                Cancelar
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="setBarcode"> Guardar </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)"> edit </v-icon>
       <v-icon small class="mr-2" @click="deleteItem(item)"> delete </v-icon>
+      <v-icon small class="mr-2" @click="saveBarcode(item)"> qr_code_2 </v-icon>
     </template>
   </v-data-table>
 </template>
@@ -71,6 +99,7 @@ import axios from "axios";
 export default {
   data: () => ({
     items: [],
+    barcodeItem: [],
     headers: [
       {
         text: "Detalle",
@@ -85,6 +114,7 @@ export default {
     editedIndex: -1,
     search: "",
     dialog: false,
+    dialogBarcode: false,
     dialogDelete: false,
     desserts: [],
     editedItem: {},
@@ -160,6 +190,11 @@ export default {
       this.dialogDelete = true;
     },
 
+    saveBarcode(item) {
+      this.barcodeItem = Object.assign({}, item);
+      this.dialogBarcode = true;
+    },
+
     deleteItemConfirm() {
       this.deleteProduct(this.editedItem);
       this.closeDelete();
@@ -171,6 +206,11 @@ export default {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
+    },
+
+    closeBarcode() {
+      this.dialogBarcode = false;
+      this.barcodeItem = {};
     },
 
     closeDelete() {
@@ -227,6 +267,20 @@ export default {
           sale_value: editedItem.saleValue,
           existence: editedItem.existence,
           barcode: editedItem.barcode,
+        })
+        .then(() => {
+          this.getProducts();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    async setBarcode() {
+      axios
+        .post(`api/products/saveNewBarcode`, {
+          product_id: this.barcodeItem.id,
+          barcode: this.barcodeItem.barcode,
         })
         .then(() => {
           this.getProducts();
