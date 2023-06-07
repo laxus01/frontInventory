@@ -283,6 +283,7 @@ export default {
           barcode: this.barcodeItem.barcode,
         })
         .then(() => {
+          this.closeBarcode();
           this.getProducts();
         })
         .catch((err) => {
